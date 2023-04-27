@@ -1,5 +1,6 @@
 from rest_framework.serializers import ModelSerializer
-from .models import User, Post, Comment
+
+from .models import Comment, Post, User
 
 
 # Create serializers of User, Post, Comment
@@ -18,13 +19,12 @@ class RegisterSerializer(ModelSerializer):
     def create(self, validated_data):
         if validated_data['user_type'] == 'superuser':
             user = User.objects.create_superuser(
-                email=validated_data['email'],
-                password=validated_data['password'])
+                email=validated_data['email'], password=validated_data['password']
+            )
             return user
         else:
             user = User.objects.create_user(
-                email=validated_data['email'],
-                password=validated_data['password']
+                email=validated_data['email'], password=validated_data['password']
             )
             return user
 

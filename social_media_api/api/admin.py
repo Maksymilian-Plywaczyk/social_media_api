@@ -1,6 +1,7 @@
 from django.contrib import admin
-from .models import Post, Comment
 from django.contrib.auth import get_user_model
+
+from .models import Comment, Post
 
 # Register your models here.
 

@@ -1,7 +1,7 @@
-from django.db import models
-from django.contrib.auth.models import AbstractUser, UserManager
-from django.utils.translation import gettext as _
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import AbstractUser, UserManager
+from django.db import models
+from django.utils.translation import gettext as _
 
 
 class CustomUserManager(UserManager):
@@ -34,7 +34,10 @@ class CustomUserManager(UserManager):
 class User(AbstractUser):
     SUPER_USER = "superuser"
     NORMAL_USER = "normal"
-    USER_TYPES = [(SUPER_USER, _('Super user type')), (NORMAL_USER, _('Normal user type'))]
+    USER_TYPES = [
+        (SUPER_USER, _('Super user type')),
+        (NORMAL_USER, _('Normal user type')),
+    ]
 
     username = None
     email = models.EmailField(_('email address'), unique=True)
@@ -62,6 +65,10 @@ class Post(models.Model):
 class Comment(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
-    post_id = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_comments')
+    author_id = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name='comments'
+    )
+    post_id = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name='post_comments'
+    )
     likes = models.ManyToManyField(User, related_name="liked_comments")

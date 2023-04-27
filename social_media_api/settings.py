@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
-from pathlib import Path
-from dotenv import load_dotenv,find_dotenv
 import os
+from pathlib import Path
+
+from dotenv import find_dotenv, load_dotenv
+
 load_dotenv(find_dotenv())
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -40,7 +42,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'rest_framework',
     'social_media_api.api',
-    'knox']
+    'knox',
+]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -85,7 +88,7 @@ DATABASES = {
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
-    'DEFAULT_AUTHENTICATION_CLASSES': ['knox.auth.TokenAuthentication']
+    'DEFAULT_AUTHENTICATION_CLASSES': ['knox.auth.TokenAuthentication'],
 }
 
 # Password validation

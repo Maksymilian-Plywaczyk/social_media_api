@@ -1,9 +1,10 @@
-from django.test import TestCase
-from ..models import Post, Comment
 from django.contrib.auth import get_user_model
+from django.test import TestCase
 
+from ..models import Comment, Post
 
 # Create your tests here.
+
 
 class UserTestCase(TestCase):
     def test_create_user_with_email_successful(self):
@@ -16,7 +17,9 @@ class UserTestCase(TestCase):
     def test_create_superuser_with_email_successful(self):
         email = "example@example.com"
         password = "test123"
-        super_user = get_user_model().objects.create_superuser(email=email, password=password)
+        super_user = get_user_model().objects.create_superuser(
+            email=email, password=password
+        )
         self.assertTrue(super_user.is_superuser, True)
         self.assertEqual(super_user.user_type, 'superuser')
 
@@ -37,7 +40,9 @@ class UserTestCase(TestCase):
 
 class PostTestCase(TestCase):
     def test_create_post_successful(self):
-        user = get_user_model().objects.create_user(email="example@example.com", password="test123")
+        user = get_user_model().objects.create_user(
+            email="example@example.com", password="test123"
+        )
         title = "Test title"
         content = "Test content"
 
@@ -49,8 +54,12 @@ class PostTestCase(TestCase):
 
 class CommentTestCase(TestCase):
     def test_create_comment_successful(self):
-        user = get_user_model().objects.create_user(email="example@example.com", password="test123")
-        post = Post.objects.create(title="Test title", content="Test content", user=user)
+        user = get_user_model().objects.create_user(
+            email="example@example.com", password="test123"
+        )
+        post = Post.objects.create(
+            title="Test title", content="Test content", user=user
+        )
 
         content = "Test comment"
 
