@@ -58,12 +58,12 @@ class CommentTestCase(TestCase):
             email="example@example.com", password="test123"
         )
         post = Post.objects.create(
-            title="Test title", content="Test content", user=user
+            title="Test title", content="Test content", author_id=user
         )
 
         content = "Test comment"
 
-        comment = Comment.objects.create(content=content, author_id=user, post=post)
+        comment = Comment.objects.create(content=content, author_id=user, post_id=post)
         self.assertEqual(comment.content, content)
         self.assertEqual(comment.author_id, user)
-        self.assertEqual(comment.post, post)
+        self.assertEqual(comment.post_id, post)
